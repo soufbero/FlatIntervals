@@ -16,15 +16,15 @@ public class RangeService {
 
     private static final SecureRandom rand = new SecureRandom();
 
-    private static RangeSet<BigInteger> intervalRangeSet;
+    private RangeSet<BigInteger> intervalRangeSet;
     private static final BigInteger BIG_INTEGER_TOO_SMALL = new BigInteger("-1");
     private static final BigInteger BIG_INTEGER_TOO_LARGE = new BigInteger("1234567890123456789012");
 
     //statistics
-    private static int numOfNonOverlaps = 0;
-    private static int numOfOverlaps = 0;
-    private static int numOfRangesSplit = 0;
-    private static int numOfRangesSkipped = 0;
+    private int numOfNonOverlaps = 0;
+    private int numOfOverlaps = 0;
+    private int numOfRangesSplit = 0;
+    private int numOfRangesSkipped = 0;
 
     private static List<String> outputResults;
 
@@ -46,10 +46,9 @@ public class RangeService {
                 .min(new BigInteger(min)).max(new BigInteger(max)).build()).value(value).build();
     }
 
-    public RangeSet<BigInteger> getRangeSetFromOriginalRanges(List<IntervalDto> originalRanges){
+    public void generateRangeSetFromOriginalRanges(List<IntervalDto> originalRanges){
         reInitializeValues();
         originalRanges.forEach(intervalDto -> addRangeToSet(intervalDto));
-        return intervalRangeSet;
     }
 
     private void reInitializeValues(){
@@ -61,7 +60,7 @@ public class RangeService {
         outputResults = new ArrayList<>();
     }
 
-    private static void addRangeToSet(IntervalDto intervalDto) {
+    private void addRangeToSet(IntervalDto intervalDto) {
         outputResults.add("------------------------------------------");
         Range<BigInteger> r = Range.closed(intervalDto.getIntervalId().getMin(), intervalDto.getIntervalId().getMax());
         outputResults.add(r.toString());

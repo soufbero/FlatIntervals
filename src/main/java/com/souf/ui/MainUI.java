@@ -1,6 +1,5 @@
 package com.souf.ui;
 
-import com.google.common.collect.RangeSet;
 import com.souf.dto.IntervalDto;
 import com.souf.flatten.RangeService;
 import com.vaadin.flow.component.button.Button;
@@ -13,7 +12,6 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.material.Material;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @Route("flatten")
@@ -48,7 +46,7 @@ public class MainUI extends VerticalLayout {
             results.setValue("");
             String input = ranges.getValue();
             List<IntervalDto> originalRanges = rangeService.generateRangesFromString(input);
-            RangeSet<BigInteger> rangeSet = rangeService.getRangeSetFromOriginalRanges(originalRanges);
+            rangeService.generateRangeSetFromOriginalRanges(originalRanges);
             String output = rangeService.formatRangeSet();
             results.setValue(output);
         });

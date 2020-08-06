@@ -1,6 +1,5 @@
 package com.souf;
 
-import com.google.common.collect.*;
 import com.souf.dto.IntervalDto;
 import com.souf.dto.IntervalId;
 import com.souf.flatten.RangeService;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class FlattenRanges {
+public class FlattenRangesTest {
 
     private static final RangeService rangeService = new RangeService();
 
@@ -23,9 +22,6 @@ public class FlattenRanges {
     private static SecureRandom rand = new SecureRandom();
     private static int maxLimitLength = maxLimit.bitLength();
 
-
-
-
     public static void main(String[] args) {
 
         List<IntervalDto> originalIntervals = new ArrayList<>();
@@ -36,17 +32,14 @@ public class FlattenRanges {
         //you can also create a random list of ranges
         //createRandomRanges(originalIntervals);
 
-
         System.out.println("Interval Set Creation Started: " + new Date());
-        rangeService.getRangeSetFromOriginalRanges(originalIntervals);
+        rangeService.generateRangeSetFromOriginalRanges(originalIntervals);
         System.out.println("Interval Set Creation Completed: " + new Date());
 
         System.out.println(rangeService.formatRangeSet());
         rangeService.printStatistics();
 
     }
-
-
 
     private static void createStaticRanges(List<IntervalDto> originalIntervals){
         originalIntervals.add(rangeService.generateRange("5", "10", 4));
@@ -85,8 +78,5 @@ public class FlattenRanges {
             res = res.mod(rangeSpan).add(minLimit);
         return res;
     }
-
-
-
 
 }
